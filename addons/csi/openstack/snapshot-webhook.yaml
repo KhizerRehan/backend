@@ -13,8 +13,12 @@
 # limitations under the License.
 
 # Sourced from:
-# - https://github.com/kubernetes-csi/external-snapshotter/blob/v6.3.3/deploy/kubernetes/webhook-example/webhook.yaml
-# - https://github.com/kubernetes-csi/external-snapshotter/blob/v6.3.3/deploy/kubernetes/webhook-example/rbac-snapshot-webhook.yaml
+# - https://github.com/kubernetes-csi/external-snapshotter/blob/v8.1.1/deploy/kubernetes/webhook-example/webhook.yaml
+# - https://github.com/kubernetes-csi/external-snapshotter/blob/v8.1.1/deploy/kubernetes/webhook-example/rbac-snapshot-webhook.yaml
+# v8.1.1 is the last released version of snapshot-validation-webhook; the component was
+# dropped upstream afterwards. Its ValidatingWebhookConfiguration and serving certificate
+# are managed in code (user-cluster-controller-manager), so the Deployment has to stay
+# until that side is retired as well.
 # Modifications:
 #   - change namespace
 #   - template function to replace base registry
@@ -48,7 +52,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: snapshot-validation
-        image: {{ Image "registry.k8s.io/sig-storage/snapshot-validation-webhook:v6.3.1" }}
+        image: {{ Image "registry.k8s.io/sig-storage/snapshot-validation-webhook:v8.1.1" }}
         imagePullPolicy: IfNotPresent
         args:
           - '--tls-cert-file=/etc/snapshot-validation-webhook/certs/cert.pem'

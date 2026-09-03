@@ -18,7 +18,7 @@ OUTPUT_FILE = driver.yaml
 REPO_NAME = kkp-addons-csi-openstack
 
 # alpha.1 allows to specify extraEnv in Helm values
-CHART_VERSION = 2.36.0
+CHART_VERSION = 2.36.2
 
 .PHONY: default
 default: setup-helm build clean-helm
